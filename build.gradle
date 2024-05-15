@@ -16,9 +16,15 @@ repositories {
 }
 
 dependencies {
+	// 메모리 데이터베이스 사용
+	implementation 'org.springframework.boot:spring-boot-starter-jdbc'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.projectlombok:lombok'
+	runtimeOnly 'com.h2database:h2'
+	implementation group: 'org.apache.poi', name: 'poi', version: '3.9'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+
 }
 
 tasks.named('test') {
