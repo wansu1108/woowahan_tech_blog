@@ -1,4 +1,4 @@
-package com.wskim.woowahan.excel;
+package com.wskim.woowahan.web;
 
 import java.util.List;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
