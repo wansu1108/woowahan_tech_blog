@@ -1,4 +1,4 @@
-package com.wskim.woowahan.excel.dto;
+package com.wskim.woowahan.excel;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

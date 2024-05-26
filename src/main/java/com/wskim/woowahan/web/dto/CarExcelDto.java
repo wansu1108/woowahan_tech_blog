@@ -1,4 +1,6 @@
-package com.wskim.woowahan.excel.dto;
+package com.wskim.woowahan.web.dto;
+
+import com.wskim.woowahan.excel.ExcelColumn;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

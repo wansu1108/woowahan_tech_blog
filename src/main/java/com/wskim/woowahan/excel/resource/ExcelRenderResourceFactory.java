@@ -9,7 +9,7 @@ import java.util.Map;
 import org.apache.poi.ss.usermodel.Workbook;
 
 import com.wskim.woowahan.common.util.SuperClassReflectionUtils;
-import com.wskim.woowahan.excel.dto.ExcelColumn;
+import com.wskim.woowahan.excel.ExcelColumn;
 
 public class ExcelRenderResourceFactory {
 

@@ -5,7 +5,7 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import com.wskim.woowahan.excel.dto.CarExcelDto;
+import com.wskim.woowahan.web.dto.CarExcelDto;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

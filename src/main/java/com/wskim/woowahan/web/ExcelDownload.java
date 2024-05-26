@@ -8,7 +8,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import lombok.AllArgsConstructor;
 
 import com.wskim.woowahan.excel.SimpleExcelFile;
-import com.wskim.woowahan.excel.dto.CarExcelDto;
+import com.wskim.woowahan.web.dto.CarExcelDto;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
@@ -122,8 +122,10 @@ public class ExcelDownload {
         XSSFCellStyle xssfCellStyle = (XSSFCellStyle) cellStyle;
         xssfCellStyle.setFillForegroundColor(new XSSFColor(color, new DefaultIndexedColorMap()));
         cellStyle.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+
         cellStyle.setAlignment(HorizontalAlignment.CENTER);
         cellStyle.setVerticalAlignment(VerticalAlignment.CENTER);
+        
         cellStyle.setBorderLeft(BorderStyle.THIN);
         cellStyle.setBorderTop(BorderStyle.THIN);
         cellStyle.setBorderRight(BorderStyle.THIN);
