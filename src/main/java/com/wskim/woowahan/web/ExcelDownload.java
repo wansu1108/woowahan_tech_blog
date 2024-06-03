@@ -6,8 +6,10 @@ import java.awt.*;
 import jakarta.annotation.PostConstruct;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 
 import com.wskim.woowahan.excel.SimpleExcelFile;
+import com.wskim.woowahan.web.dto.BreadDto;
 import com.wskim.woowahan.web.dto.CarExcelDto;
 
 import java.io.IOException;
@@ -30,6 +32,8 @@ import org.apache.poi.xssf.usermodel.XSSFCellStyle;
 import org.apache.poi.xssf.usermodel.XSSFColor;
 import org.apache.poi.xssf.usermodel.XSSFDataFormat;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 /**
  * Oct.08.2020 최태현" 님이 작성해주신 글을 참고하였습니다.
@@ -40,6 +44,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class ExcelDownload {
 
     private final CarExcelRepository repository;
+    private final BreadExcelRepository breadExcelRepository;
     
     @GetMapping("/api/v1/excel/car")
     public void downloadCarInfoV1(HttpServletResponse response) throws IOException {
@@ -145,13 +150,32 @@ public class ExcelDownload {
         excelFile.write(response.getOutputStream());
     }
 
+    @GetMapping("/api/v2/excel/bread")
+    public void downaloadBreadInfoV2(HttpServletResponse response) throws IOException {
+        List<BreadDto> data = breadExcelRepository.findAll();
+        SimpleExcelFile<BreadDto> excelFile = new SimpleExcelFile<>(data, BreadDto.class);
+
+        LocalDateTime now = LocalDateTime.now();
+        String formatedNow = now.format(DateTimeFormatter.ofPattern("yyyyMMddHHmmss"));
+        String fileName = String.format("%s.xlsx", formatedNow);
+
+        response.setHeader("Content-Disposition", "attachment; fileName=\"" + fileName + "\"");
+        excelFile.write(response.getOutputStream());
+    }
+    
+
     @PostConstruct
     public void init(){
         repository.initTable();
         repository.save(new CarExcelDto("KIA", "모닝",1000,4.9));
         repository.save(new CarExcelDto("HEYNDAI", "소나타",3000,4.7));
         repository.save(new CarExcelDto("르노삼성", "QM6",5000,4.6));
-        List<?> data = repository.findAll();
-        data.stream().forEach((o)->System.out.println(o.toString()));
+
+        breadExcelRepository.initTable();
+        breadExcelRepository.save(new BreadDto("파리바게트","퀸아망",3100,3.5));
+        breadExcelRepository.save(new BreadDto("뚜레쥬르","호두연유바게트",3800,3.2));
+        breadExcelRepository.save(new BreadDto("레제드라마","크레이프",7500,4.5));
+        breadExcelRepository.save(new BreadDto("브라운슈가","마틸다케익",9000,4.7));
+        breadExcelRepository.save(new BreadDto("호암제과","피스타치오딸기베이글",6300,5.0));
     }
 }

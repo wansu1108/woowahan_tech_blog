@@ -12,6 +12,7 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.xssf.streaming.SXSSFWorkbook;
 
 import com.wskim.woowahan.common.util.SuperClassReflectionUtils;
+import com.wskim.woowahan.excel.resource.ExcelRenderLocation;
 import com.wskim.woowahan.excel.resource.ExcelRenderResource;
 import com.wskim.woowahan.excel.resource.ExcelRenderResourceFactory;
 
@@ -63,6 +64,7 @@ public class SimpleExcelFile<T> {
         for(String fieldName : excelRenderResource.getAllDataFieldNames()){
             Cell cell = row.createCell(columnIndex++);
             cell.setCellValue(excelRenderResource.getExcelHeaderName(fieldName));
+            cell.setCellStyle(excelRenderResource.getCellStyle(fieldName, ExcelRenderLocation.HEADER));
         }
     }
     
@@ -72,6 +74,7 @@ public class SimpleExcelFile<T> {
         int columnIndex = columnStartIndex;
         for(String dataFieldName : excelRenderResource.getAllDataFieldNames()){
             Cell cell = row.createCell(columnIndex++);
+            cell.setCellStyle(excelRenderResource.getCellStyle(dataFieldName, ExcelRenderLocation.BODY));
             try {
                 Field field = SuperClassReflectionUtils.getField(data.getClass(), dataFieldName);
                 field.setAccessible(true);

@@ -11,7 +11,7 @@ import com.wskim.woowahan.excel.exception.UnSupportedExcelTypeException;
 public class DefaultExcelColor implements ExcelColor{
     
     private static final int MIN_RGB = 0;
-    private static final int MAX_RGB = 0;
+    private static final int MAX_RGB = 255;
 
     byte red;
     byte blue;

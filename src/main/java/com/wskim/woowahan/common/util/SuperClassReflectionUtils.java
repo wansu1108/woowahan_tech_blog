@@ -1,5 +1,6 @@
 package com.wskim.woowahan.common.util;
 
+import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -45,4 +46,13 @@ public class SuperClassReflectionUtils {
 		return classes;
 	}
 
+    // fieldInClazz targetAnnotion 추출
+    public static Annotation getAnnotation(Class<?> clazz, Class<? extends Annotation> targetAnnotion) {
+        for(Class<?> clazzInClasses : getAllClassesIncludingSuperClasses(clazz, false)){
+            if(clazzInClasses.isAnnotationPresent(targetAnnotion)){
+                return clazzInClasses.getAnnotation(targetAnnotion);
+            }
+        }
+        return null;
+    }
 }
